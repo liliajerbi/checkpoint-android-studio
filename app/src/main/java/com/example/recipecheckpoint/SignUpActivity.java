@@ -1,8 +1,8 @@
 package com.example.recipecheckpoint;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,7 +18,8 @@ public class SignUpActivity extends AppCompatActivity {
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO go to home
+                Intent goToHome = new Intent(SignUpActivity.this, HomeActivity.class);
+                startActivity(goToHome);
             }
         });
 
@@ -26,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
         btGotoSingIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToSignIn = new Intent (SignUpActivity.this, MainActivity.class);
+                Intent goToSignIn = new Intent(SignUpActivity.this, MainActivity.class);
                 startActivity(goToSignIn);
             }
         });
