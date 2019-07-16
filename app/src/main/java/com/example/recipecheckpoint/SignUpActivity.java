@@ -13,7 +13,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
         Button btSignUp = findViewById(R.id.btSignUp);
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

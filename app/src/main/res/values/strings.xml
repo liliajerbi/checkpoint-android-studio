@@ -10,4 +10,7 @@
     <string name="j_ai_d_j_un_compte">J\'ai déjà un compte</string>
     <string name="nom_d_utilisateur">Nom d\'utilisateur</string>
     <string name="recettes">Recettes</string>
+    <string name="retour">Retour</string>
+    <string name="ingr_dients">Ingrédients :</string>
+    <string name="recette">Recette :</string>
 </resources>
