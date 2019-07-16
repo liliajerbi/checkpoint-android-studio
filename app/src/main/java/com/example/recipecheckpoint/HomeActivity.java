@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.recipecheckpoint.Adapter.RecipeAdapter;
 import com.example.recipecheckpoint.model.Recipe;
+import com.example.recipecheckpoint.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        User user = UserSingleton.getInstance().getUser();
 
         final List<Recipe> recipes = new ArrayList<>();
         Recipe carbonara = new Recipe("Carbonara", "Lardons", "creme");
