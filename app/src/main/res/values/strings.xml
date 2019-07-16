@@ -13,4 +13,6 @@
     <string name="retour">Retour</string>
     <string name="ingr_dients">Ingrédients :</string>
     <string name="recette">Recette :</string>
+    <string name="voir_mes_recettes">Voir mes recettes</string>
+    <string name="mes_recettes">Mes recettes</string>
 </resources>

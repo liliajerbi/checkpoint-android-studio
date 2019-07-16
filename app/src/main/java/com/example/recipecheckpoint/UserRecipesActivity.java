@@ -14,41 +14,34 @@ import com.example.recipecheckpoint.model.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
-
+public class UserRecipesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_user_recipes);
 
-        Button btMyRecipes = findViewById(R.id.btMyRecipes);
-        btMyRecipes.setOnClickListener(new View.OnClickListener() {
+        Button btReturn = findViewById(R.id.btReturnProfile);
+        btReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, UserRecipesActivity.class);
+                Intent intent = new Intent(UserRecipesActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
 
         final List<Recipe> recipes = new ArrayList<>();
         Recipe carbonara = new Recipe("Carbonara", "Lardons", "creme");
-        Recipe blanquette = new Recipe("blanquette", "farine , lardons, veau, carottes, laurier, vin blanc", "beurre + farine d'abord");
-        Recipe carbonara2 = new Recipe("Carbonara", "Lardons", "creme");
-        Recipe carbonara3 = new Recipe("Carbonara", "Lardons", "creme");
-        Recipe carbonara4 = new Recipe("Carbonara", "Lardons", "creme");
-        Recipe carbonara5 = new Recipe("Carbonara", "Lardons", "creme");
+        Recipe pizza = new Recipe("pizza", "mozza , tomates", "beurre + farine d'abord");
+        Recipe lasagnes = new Recipe("Carbonara", "Lardons", "creme");
         recipes.add(carbonara);
-        recipes.add(blanquette);
-        recipes.add(carbonara2);
-        recipes.add(carbonara3);
-        recipes.add(carbonara4);
-        recipes.add(carbonara5);
+        recipes.add(pizza);
+        recipes.add(lasagnes);
 
         RecyclerView mRecyclerView;
         RecyclerView.Adapter mAdapter;
         RecyclerView.LayoutManager layoutManager;
-        mRecyclerView = findViewById(R.id.rvRecipeList);
+        mRecyclerView = findViewById(R.id.rvRecipeProfile);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new RecipeAdapter(recipes);
@@ -59,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view, int position) {
                 Recipe recipe = recipes.get(position);
                 RecipeSingleton.getInstance().setRecipe(recipe);
-                Intent goToDescription = new Intent(HomeActivity.this, DescriptionRecipeActivity.class);
+                Intent goToDescription = new Intent(UserRecipesActivity.this, DescriptionRecipeActivity.class);
                 startActivity(goToDescription);
             }
 
