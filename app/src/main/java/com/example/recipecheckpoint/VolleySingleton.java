@@ -21,7 +21,6 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,9 +31,7 @@ import java.util.Map;
 public class VolleySingleton {
 
     private static final String API_URL = "http://10.0.2.2:8080/";
-    private static final String SIGN_IN_URL = API_URL + "user/signIn";
-    private static final String SIGN_UP_URL = API_URL + "user/signUp";
-
+    private static final String SIGN_IN_URL = API_URL + "user/signIn/";
     private static VolleySingleton instance;
     private static Context context;
     private RequestQueue requestQueue;
@@ -104,41 +101,27 @@ public class VolleySingleton {
     }
 
     public void signIn(User user, final Consumer<User> listener) {
+
+        String url = SIGN_IN_URL + user.getEmail() + "/" + user.getPassword();
         GsonBuilder gsonBuilder = new GsonBuilder();
         final Gson gson = gsonBuilder.create();
-        final String requestBody = gson.toJson(user);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-                SIGN_IN_URL, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
 
-            @Override
-            public void onResponse(JSONObject response) {
-                User user = gson.fromJson(response.toString(), User.class);
-                listener.accept(user);
-            }
-        }, new Response.ErrorListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        User user = gson.fromJson(response.toString(), User.class);
+                        listener.accept(user);
+                    }
+                }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                new AlertDialog.Builder(context)
-                        .setTitle("Error")
-                        .setMessage(error.getMessage())
-                        .show();
+                VolleyLog.e("Error: ", error.getMessage());
             }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-
-            @Override
-            public byte[] getBody() {
-                return requestBody == null ? null : requestBody.getBytes(StandardCharsets.UTF_8);
-            }
-        };
-
+        });
         addToRequestQueue(jsonObjectRequest);
     }
 
@@ -168,7 +151,6 @@ public class VolleySingleton {
         });
         addToRequestQueue(jsonArrayRequest);
     }
-
 
     public void postRecipe(Recipe recipe, User user, final Consumer<Recipe> listener) {
 
