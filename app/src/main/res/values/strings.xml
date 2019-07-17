@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">RecipeCheckpoint</string>
+    <string name="connexion">Connexion</string>
+    <string name="e_mail">E-mail</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="me_connecter">Me connecter</string>
+    <string name="pas_encore_inscrit">Pas encore inscrit ?</string>
+    <string name="inscription">Inscription</string>
+    <string name="m_inscrire">M\'inscrire</string>
+    <string name="j_ai_d_j_un_compte">J\'ai déjà un compte</string>
+    <string name="nom_d_utilisateur">Nom d\'utilisateur</string>
+    <string name="recettes">Recettes</string>
+    <string name="retour">Retour</string>
+    <string name="ingr_dients">Ingrédients :</string>
+    <string name="recette">Recette :</string>
+    <string name="voir_mes_recettes">Voir mes recettes</string>
+    <string name="ajouter_une_recette">Ajouter une recette</string>
+    <string name="ajouter">Ajouter</string>
+    <string name="titre">Titre</string>
+    <string name="mes_recettes">Mes recettes</string>
+    <string name="supprimer">Supprimer</string>
 </resources>

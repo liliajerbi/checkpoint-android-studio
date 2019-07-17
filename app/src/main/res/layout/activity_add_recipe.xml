@@ -4,71 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".AddRecipeActivity">
 
-    <TextView
-        android:id="@+id/tvSignIn"
+    <EditText
+        android:id="@+id/etTitleRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/connexion"
+        android:layout_marginTop="68dp"
+        android:ems="10"
+        android:hint="@string/titre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAddRecipe" />
+
+    <TextView
+        android:id="@+id/tvAddRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="69dp"
+        android:text="@string/mes_recettes"
         android:textColor="@color/colorAccent"
-        android:textSize="30sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etEmailSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:hint="@string/e_mail"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSignIn" />
-
-    <EditText
-        android:id="@+id/etPasswordSignIn"
+        android:id="@+id/etIngredients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="@string/mot_de_passe"
-        android:inputType="textPassword"
+        android:gravity="start|top"
+        android:hint="@string/ingr_dients"
+        android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailSignIn" />
+        app:layout_constraintTop_toBottomOf="@+id/etTitleRecipe" />
 
-    <Button
-        android:id="@+id/btSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="77dp"
-        android:text="@string/me_connecter"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/colorAccent"
-        android:gravity="center"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswordSignIn" />
-
-    <Button
-        android:id="@+id/btGoToSignUp"
+    <EditText
+        android:id="@+id/etRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:hint="@string/recette"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etIngredients" />
+
+    <Button
+        android:id="@+id/btAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:background="@color/colorAccent"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:text="@string/pas_encore_inscrit"
+        android:text="@string/ajouter"
         android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btSignIn" />
+        app:layout_constraintTop_toBottomOf="@+id/etRecipe" />
+
 </android.support.constraint.ConstraintLayout>
