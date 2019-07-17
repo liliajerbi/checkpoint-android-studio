@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -96,13 +97,7 @@ public class VolleySingleton {
 
             @Override
             public byte[] getBody() {
-                try {
-                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
-                            requestBody, "utf-8");
-                    return null;
-                }
+                return requestBody == null ? null : requestBody.getBytes(StandardCharsets.UTF_8);
             }
         };
         addToRequestQueue(jsonObjectRequest);
@@ -140,13 +135,7 @@ public class VolleySingleton {
 
             @Override
             public byte[] getBody() {
-                try {
-                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
-                            requestBody, "utf-8");
-                    return null;
-                }
+                return requestBody == null ? null : requestBody.getBytes(StandardCharsets.UTF_8);
             }
         };
 
@@ -154,7 +143,7 @@ public class VolleySingleton {
     }
 
     public void getAllRecipes(final Consumer<List<Recipe>> collectPointListener) {
-        String url =  API_URL + "recipes";
+        String url = API_URL + "recipes";
         GsonBuilder gsonBuilder = new GsonBuilder();
         final Gson gson = gsonBuilder.create();
 
@@ -215,13 +204,47 @@ public class VolleySingleton {
 
             @Override
             public byte[] getBody() {
-                try {
-                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
-                            requestBody, "utf-8");
-                    return null;
-                }
+                return requestBody == null ? null : requestBody.getBytes(StandardCharsets.UTF_8);
+            }
+        };
+        addToRequestQueue(jsonObjectRequest);
+    }
+
+    public void getOneUSer(User user, final Consumer<User> listener) {
+
+        String url = API_URL + "user/" + user.getId();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        final Gson gson = gsonBuilder.create();
+        final String requestBody = gson.toJson(user);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                url, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                User user = gson.fromJson(response.toString(), User.class);
+                listener.accept(user);
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Error")
+                        .setMessage(error.getMessage())
+                        .show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            public byte[] getBody() {
+                return requestBody == null ? null : requestBody.getBytes(StandardCharsets.UTF_8);
             }
         };
         addToRequestQueue(jsonObjectRequest);

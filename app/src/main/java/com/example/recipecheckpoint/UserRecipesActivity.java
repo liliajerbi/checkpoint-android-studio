@@ -2,6 +2,7 @@ package com.example.recipecheckpoint;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.util.Consumer;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.widget.Button;
 
 import com.example.recipecheckpoint.Adapter.RecipeAdapter;
 import com.example.recipecheckpoint.model.Recipe;
+import com.example.recipecheckpoint.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,36 +32,39 @@ public class UserRecipesActivity extends AppCompatActivity {
             }
         });
 
-        final List<Recipe> recipes = new ArrayList<>();
-        Recipe carbonara = new Recipe("Carbonara", "Lardons", "creme");
-        Recipe pizza = new Recipe("pizza", "mozza , tomates", "beurre + farine d'abord");
-        Recipe lasagnes = new Recipe("Carbonara", "Lardons", "creme");
-        recipes.add(carbonara);
-        recipes.add(pizza);
-        recipes.add(lasagnes);
-
-        RecyclerView mRecyclerView;
-        RecyclerView.Adapter mAdapter;
-        RecyclerView.LayoutManager layoutManager;
-        mRecyclerView = findViewById(R.id.rvRecipeProfile);
-        layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new RecipeAdapter(recipes);
-        mRecyclerView.setAdapter(mAdapter);
-
-        mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mRecyclerView, new RecyclerTouchListener.ClickListener() {
+        final List<Recipe> recipesRv = new ArrayList<>();
+        VolleySingleton.getInstance(UserRecipesActivity.this).getOneUSer(UserSingleton.getInstance().getUser(), new Consumer<User>() {
             @Override
-            public void onClick(View view, int position) {
-                Recipe recipe = recipes.get(position);
-                RecipeSingleton.getInstance().setRecipe(recipe);
-                Intent goToDescription = new Intent(UserRecipesActivity.this, DescriptionRecipeActivity.class);
-                startActivity(goToDescription);
-            }
+            public void accept(User user) {
+                for (int i = 0; i < user.getRecipes().size(); i++) {
+                    Recipe recipeAdded = new Recipe(user.getRecipes().get(i).getTitle(), user.getRecipes().get(i).getIngredients(), user.getRecipes().get(i).getDescription());
+                    recipesRv.add(recipeAdded);
+                }
 
-            @Override
-            public void onLongClick(View view, int position) {
+                RecyclerView mRecyclerView;
+                RecyclerView.Adapter mAdapter;
+                RecyclerView.LayoutManager layoutManager;
+                mRecyclerView = findViewById(R.id.rvRecipeProfile);
+                layoutManager = new LinearLayoutManager(UserRecipesActivity.this);
+                mRecyclerView.setLayoutManager(layoutManager);
+                mAdapter = new RecipeAdapter(recipesRv);
+                mRecyclerView.setAdapter(mAdapter);
 
+                mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mRecyclerView, new RecyclerTouchListener.ClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Recipe recipe = recipesRv.get(position);
+                        RecipeSingleton.getInstance().setRecipe(recipe);
+                        Intent goToDescription = new Intent(UserRecipesActivity.this, DescriptionRecipeActivity.class);
+                        startActivity(goToDescription);
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+
+                    }
+                }));
             }
-        }));
+        });
     }
 }
