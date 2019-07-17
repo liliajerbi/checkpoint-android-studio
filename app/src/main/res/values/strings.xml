@@ -15,4 +15,8 @@
     <string name="recette">Recette :</string>
     <string name="voir_mes_recettes">Voir mes recettes</string>
     <string name="mes_recettes">Mes recettes</string>
+    <string name="ajouter_une_recette">Ajouter une recette</string>
+    <string name="ajouter">Ajouter</string>
+    <string name="titre">Titre</string>
+    <string name="mes_recettes">Mes recettes</string>
 </resources>

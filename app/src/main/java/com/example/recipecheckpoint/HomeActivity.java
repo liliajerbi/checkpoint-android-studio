@@ -32,8 +32,16 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        final List<Recipe> recipesRv = new ArrayList<>();
+        Button btAdd = findViewById(R.id.btAddRecipe);
+        btAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AddRecipeActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        final List<Recipe> recipesRv = new ArrayList<>();
         VolleySingleton.getInstance(HomeActivity.this).getAllRecipes(new Consumer<List<Recipe>>() {
             @Override
             public void accept(List<Recipe> recipes) {

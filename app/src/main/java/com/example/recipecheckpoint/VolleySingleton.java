@@ -183,7 +183,7 @@ public class VolleySingleton {
 
     public void postRecipe(Recipe recipe, User user, final Consumer<Recipe> listener) {
 
-        String url = API_URL + "user" + user.getId() + "recipes";
+        String url = API_URL + "user/" + user.getId() + "/recipes";
         GsonBuilder gsonBuilder = new GsonBuilder();
         final Gson gson = gsonBuilder.create();
         final String requestBody = gson.toJson(recipe);
