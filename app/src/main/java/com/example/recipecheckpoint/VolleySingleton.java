@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class VolleySingleton {
 
-    private static final String API_URL = "https://10.0.2.2:8080/";
+    private static final String API_URL = "http://10.0.2.2:8080/";
     private static final String SIGN_IN_URL = API_URL + "user/signIn";
     private static final String SIGN_UP_URL = API_URL + "user/signUp";
 
