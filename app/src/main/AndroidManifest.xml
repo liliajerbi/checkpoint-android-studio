@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddRecipeActivity"></activity>
+        <activity android:name=".AddRecipeActivity" />
         <activity android:name=".UserRecipesActivity" />
         <activity android:name=".DescriptionRecipeActivity" />
         <activity android:name=".HomeActivity" />

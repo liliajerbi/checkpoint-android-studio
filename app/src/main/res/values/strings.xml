@@ -18,4 +18,5 @@
     <string name="ajouter">Ajouter</string>
     <string name="titre">Titre</string>
     <string name="mes_recettes">Mes recettes</string>
+    <string name="supprimer">Supprimer</string>
 </resources>

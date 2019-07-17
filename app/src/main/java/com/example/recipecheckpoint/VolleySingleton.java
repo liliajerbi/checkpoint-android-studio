@@ -3,6 +3,7 @@ package com.example.recipecheckpoint;
 import android.content.Context;
 import android.support.v4.util.Consumer;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -229,6 +230,31 @@ public class VolleySingleton {
                 return requestBody == null ? null : requestBody.getBytes(StandardCharsets.UTF_8);
             }
         };
+        addToRequestQueue(jsonObjectRequest);
+    }
+
+    // j'ai essayé le delete mais l'id est toujours null , je ne suis pas arrivé à le récupérer
+    public void deleteOneRecipe(Recipe recipe, final Consumer<Recipe> listener) {
+        String url = API_URL + "recipes/" + recipe.getId();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        final Gson gson = gsonBuilder.create();
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE,
+                url, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("Response", String.valueOf(response));
+                Recipe recipe = gson.fromJson(response.toString(), Recipe.class);
+                listener.accept(recipe);
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+            }
+        });
         addToRequestQueue(jsonObjectRequest);
     }
 }
